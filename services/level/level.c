@@ -79,6 +79,7 @@ void CheckPlayerShotColision(struct Player *player, struct Fase *fase, struct Es
         else if(curr->Trajectory == 1) curr->X += BULLET_MOVE;
 
         bool hit = false;
+        bool out_the_escene = (curr->X < background.Init_x || curr->X > background.Fim_X); //case a bala esteja fora da janela
 
         // Verifica colisão com todos os vilões
         for (int i = 0; i < fase->QtdVilhoes; i++)
@@ -105,7 +106,7 @@ void CheckPlayerShotColision(struct Player *player, struct Fase *fase, struct Es
             }
         }
 
-        if (hit)
+        if (hit || out_the_escene)
         {
             struct Bullet *to_delete = curr;
             if (prev)

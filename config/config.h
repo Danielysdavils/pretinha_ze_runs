@@ -25,11 +25,19 @@
 /* VILIANS - CONFIG DATA */
 #define VILLIAN_SUB_01 "assets/players/villian/sub_01"
 #define VILLIAN_SUB_02 "assets/players/villian/sub_02"
+
 #define VILLIAN_BOSS_01 "assets/players/villian/boss_01"
 #define VILLIAN_BOSS_02 "assets/players/villian/boss_02"
+
 #define VILLIAN_EASY_COOLDOWN 70
 #define VILLIAN_MEDIUN_COOLDOWN 40
 #define VILLIAN_HARD_COOLDOWN 20
+
+#define VILLIAN_SUB_X_RESOLUTION 185
+#define VILLIAN_SUB_Y_RESOLUTION 141
+
+#define VILLIAN_BOSS_X_RESOLUTION 280
+#define VILLIAN_BOSS_Y_RESOLUTION 270
 
 /* ELEMENTS - CONFIG DATA */
 #define LIFE_PATH "assets/elements/life"
@@ -53,12 +61,6 @@
 #define FASE_0_BACKGROUND "assets/backgrounds/fase_1.png"
 #define FASE_0_MUSIC "assets/music/fase_0.ogg"
 #define FASE_FONT "assets/fonts/font3.ttf" 
-
-#define VILLIAN_SUB_X_RESOLUTION 185
-#define VILLIAN_SUB_Y_RESOLUTION 141
-
-#define VILLIAN_BOSS_X_RESOLUTION 280
-#define VILLIAN_BOSS_Y_RESOLUTION 270
 
 /* FASE 1 - CONFIG DATA */
 #define FASE_1_BACKGROUND "assets/backgrounds/fase_2.png"
