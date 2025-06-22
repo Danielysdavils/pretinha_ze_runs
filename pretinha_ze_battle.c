@@ -321,9 +321,7 @@ void PauseGame(GameState *state, struct Fase *level, ALLEGRO_EVENT_QUEUE *event_
 }
 
 void InitGame(Database *local_db, GameState *state, ALLEGRO_EVENT_QUEUE *event_queue)
-{
-    printf("state %d", state);
-    
+{ 
     int current_level = local_db->lavel;
     struct Fase *fase = NULL;
 
