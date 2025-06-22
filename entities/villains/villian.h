@@ -37,6 +37,7 @@ struct Villian{
     int QtdLife; //hard? x2 life
     int CurrentLife;
     struct Life *Life; //vetor de vidas
+    bool Active;
 };
 
 struct Villian* CreateVillian(struct Position position, Difficult difficult, VillianType villian_type, char *Name, const char *villian_path);

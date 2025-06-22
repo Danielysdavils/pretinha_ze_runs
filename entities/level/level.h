@@ -11,7 +11,7 @@ struct Fase{
     Difficult Level_difficult;
    
     int QtdVilhoes;
-    int CurrentActiveVillians;
+    int CurrentActiveVillians; //qtd viloes ativos na fase
     struct Villian **Villian; //vetor de villanos
     struct Player *Player;
     struct Progress Progress; 

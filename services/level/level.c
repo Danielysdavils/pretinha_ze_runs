@@ -14,12 +14,6 @@
 /*                                                                                    */
 /**************************************************************************************/
 
-void UpdateBullet(struct Bullet *index)
-{
-    if(!index->Trajectory) index->X -= BULLET_MOVE;
-    else if(index->Trajectory == 1) index->X += BULLET_MOVE;
-}
-
 void CheckVillianShotColision(struct Villian *villian, struct Player *player, struct Escene background)
 {
     struct Bullet *prev = NULL;
@@ -27,7 +21,6 @@ void CheckVillianShotColision(struct Villian *villian, struct Player *player, st
 
     while (curr != NULL)
     {
-        //UpdateBullet(curr);
         if(!curr->Trajectory) curr->X -= BULLET_MOVE;
         else if(curr->Trajectory == 1) curr->X += BULLET_MOVE;
 
@@ -74,7 +67,6 @@ void CheckPlayerShotColision(struct Player *player, struct Fase *fase, struct Es
 
     while (curr != NULL)
     {
-        //UpdateBullet(curr);
         if(!curr->Trajectory) curr->X -= BULLET_MOVE;
         else if(curr->Trajectory == 1) curr->X += BULLET_MOVE;
 
@@ -85,8 +77,7 @@ void CheckPlayerShotColision(struct Player *player, struct Fase *fase, struct Es
         for (int i = 0; i < fase->QtdVilhoes; i++)
         {
             struct Villian *v = fase->Villian[i];
-            if (!v)
-                continue;
+            if (!v || !v->Active) continue; //não descontar vida de viloes que não estão renderizados
 
             if ((curr->X >= v->Position.X && curr->X <= v->Position.X + VILLIAN_SUB_X_RESOLUTION) &&
                 (curr->Y >= v->Position.Y && curr->Y <= v->Position.Y + VILLIAN_SUB_Y_RESOLUTION))
@@ -153,7 +144,9 @@ void UpdateFase(struct Fase *fase)
         struct Villian *v = fase->Villian[i];
         if(v != NULL)
         {
-            printf("POSIION: %d NOME:%s\n", v->Position.X, v->Name); 
+            printf("POSIION: %d NOME:%s\n", v->Position.X, v->Name);
+            if(!v->Active) v->Active = true; 
+
             MoveVillian(v, fase->Player->Position.X, fase->Background.Init_x, fase->Background.Fim_X);
             UpdateVillianFrames(v, DELTA_TIMER);
             CheckVillianShotColision(v, fase->Player, fase->Background);
@@ -196,7 +189,6 @@ void DrawFase(struct Fase *fase, ALLEGRO_BITMAP *bg, ALLEGRO_AUDIO_STREAM *music
     if(fase->Progress.QtdKilledVillians == fase->CurrentActiveVillians && fase->CurrentActiveVillians <= fase->QtdVilhoes)
         fase->CurrentActiveVillians++;
 }
-
 
 /**************************************************************************************/
 /*                                                                                    */
@@ -272,6 +264,7 @@ struct Fase* CreateFase(Difficult level_dificult, int level, const char *player_
         pos.X = GenerateAleatValue(X_SCREEN, X_BACKGROUND);
         pos.Y = vil_y_pos;
         fase->Villian[i] = CreateVillian(pos, level_dificult, SUB, "CARECA", fase->SubVillianPath);
+        fase->Villian[i]->Active = true;
         if(!fase->Villian[i])
         {
             printf("[ERRO]: VILLAIN CREATION");

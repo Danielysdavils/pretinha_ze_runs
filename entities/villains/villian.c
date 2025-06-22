@@ -52,6 +52,7 @@ struct Villian* CreateVillian(struct Position position, Difficult difficult, Vil
     v->Gun = GunCreate(cooldown);
     if(!v->Gun) return NULL;
 
+    v->Active = false;
     v->Type = villian_type;
     v->QtdLife = villian_type == BOSS ? (VILLIAN_LIFE + 1) * 2 : VILLIAN_LIFE;
     v->CurrentLife = v->QtdLife;

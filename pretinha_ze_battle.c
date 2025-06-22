@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 #include "config/config.h"
 #include "entities/level/level.h"
 #include "services/data/data.h"
@@ -137,6 +136,7 @@ void DisplayLostMenu(GameState *state, ALLEGRO_EVENT_QUEUE *event_queue)
 void DisplayWinnFase(GameState *state, struct Fase *level, ALLEGRO_EVENT_QUEUE *event_queue)
 {
     ALLEGRO_BITMAP *background = al_load_bitmap(WINN_BACKGROUND);
+    ALLEGRO_BITMAP *winn = al_load_bitmap(WINN_ELEMENT);
 	ALLEGRO_FONT* font = al_load_font(MENU_FONT, 80, 0);
 	ALLEGRO_FONT* sub_font = al_load_font(MENU_FONT, 40, 0);
     ALLEGRO_FONT* emoji = al_load_font(EMOJI_FONT, 40, 0);
@@ -169,13 +169,14 @@ void DisplayWinnFase(GameState *state, struct Fase *level, ALLEGRO_EVENT_QUEUE *
         if(ev.type == ALLEGRO_EVENT_TIMER)
         {
             al_draw_bitmap(background, 0,0,0);
-		    al_draw_text(font, al_map_rgb(255,255,255), 180 - 60, 100, 0, "YOU WINN THIS FASE!");
+		    al_draw_text(font, al_map_rgb(255,255,255), 180 - 40, 100, 0, "YOU WON THIS FASE!");
+            al_draw_bitmap(winn, X_SCREEN/2 - 30, 290, 0);
 
             if(((int)(al_get_time() * 2)) % 2 == 0)
             {
-                al_draw_text(emoji, al_map_rgb(0,0,0), 180 - 80, 500, 0, "MN");
-                al_draw_text(sub_font, al_map_rgb(0,0,0), 180, 500, 0, "PRESS START TO CONTINUE");
-                al_draw_text(emoji, al_map_rgb(0,0,0), 180 + 250, 500, 0, "MN");
+                al_draw_text(emoji, al_map_rgb(255,255,255), 230 - 80, 600, 0, "MN");
+                al_draw_text(sub_font, al_map_rgb(255,255,255), 230, 600, 0, "PRESS START TO CONTINUE");
+                al_draw_text(emoji, al_map_rgb(255,255,255), 230 + 500, 600, 0, "MN");
             }
             
             al_flip_display();
@@ -187,6 +188,7 @@ void DisplayWinnFase(GameState *state, struct Fase *level, ALLEGRO_EVENT_QUEUE *
     al_destroy_font(emoji);
     al_destroy_font(sub_font);
     al_destroy_bitmap(background);
+    al_destroy_bitmap(winn);
     al_detach_audio_stream(music);
     al_destroy_audio_stream(music);
 }
@@ -230,7 +232,7 @@ void DisplayWinnGame(GameState *state, ALLEGRO_EVENT_QUEUE *event_queue)
         {
             al_clear_to_color(al_map_rgb(0, 0, 0));
             al_draw_bitmap(background, 0,0,0);
-		    al_draw_text(font, al_map_rgb(255,255,255), 180 - 60, 100, 0, "YOU WINN THE GAME!!!");
+		    al_draw_text(font, al_map_rgb(255,255,255), 180 - 60, 100, 0, "YOU WON THE GAME!!!");
             al_draw_bitmap(winn, X_SCREEN/2 - 30, 290, 0);
             al_draw_text(sub_sub_font, al_map_rgb(0,0,0), 180 - 80, 600, 0, "Obrigado por jogar :)");
             al_draw_bitmap(pretinha, 180 + 180, 600, 0);
@@ -456,7 +458,7 @@ int main()
     free(local_db);
     al_destroy_event_queue(queue);
     al_destroy_display(disp);
-    
+
     return 0;
 }
 
