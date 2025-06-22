@@ -34,12 +34,13 @@ void DisplayMenu(GameState *state, ALLEGRO_EVENT_QUEUE *event_queue)
                     *state = 1;
                     running = false;
                 break;
-            
-                case ALLEGRO_KEY_ESCAPE:
-                    *state = 2;
-                    running = false;
-                break;
             }
+        }
+
+        if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+        {
+            *state = STATE_EXIT;
+            running = false;
         }
 
         if(ev.type == ALLEGRO_EVENT_TIMER)
@@ -455,6 +456,7 @@ int main()
     free(local_db);
     al_destroy_event_queue(queue);
     al_destroy_display(disp);
+    
     return 0;
 }
 
