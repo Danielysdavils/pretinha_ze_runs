@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <direct.h>
 #include "player.h"
 #include "../gun/gun.h"
 #include "../../services/joystick/joystick.h"
